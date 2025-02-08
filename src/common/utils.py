@@ -13,8 +13,8 @@ from langchain_openai import ChatOpenAI
 def get_model(local=False):
     if local:
         return ChatOpenAI(
-            model="qwen2.5-7b-instruct-1m@q8_0",
-            # model="qwen2.5-7b-instruct-1m",
+            # model="qwen2.5-7b-instruct-1m@q8_0",
+            model="qwen2.5-7b-instruct-1m",
             base_url="http://localhost:1234/v1",
             api_key="not-used",
         )
