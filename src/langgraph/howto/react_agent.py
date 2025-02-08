@@ -1,28 +1,11 @@
-import io
-from langgraph.prebuilt import create_react_agent
-from PIL import Image as PILImage
-from IPython.display import Image, display
-from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI, OpenAI
 from typing import Literal
+
 from langchain_core.tools import tool
+from langgraph.prebuilt import create_react_agent
 
-load_dotenv()
+from src.common.utils import get_model, save_graph_png
 
-model = ChatOpenAI(model="gpt-4o", temperature=0)
-model = ChatOpenAI(
-    model="qwen2.5-7b-instruct-1m",
-    base_url="http://localhost:1234/v1"
-)
-
-
-def save_graph_png():
-    display(Image(graph.get_graph().draw_mermaid_png()))
-
-    # Save the image
-    image_data = graph.get_graph().draw_mermaid_png()
-    image = PILImage.open(io.BytesIO(image_data))
-    image.save("graph.png")
+model = get_model(local=True)
 
 
 @tool
@@ -43,7 +26,7 @@ tools = [get_weather]
 graph = create_react_agent(model, tools=tools)
 
 
-# save_graph_png()
+save_graph_png(graph)
 
 def print_stream(stream):
     for s in stream:
