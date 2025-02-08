@@ -1,16 +1,9 @@
-import getpass
-import os
-from langchain.chat_models import init_chat_model
+from dotenv import load_dotenv
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_openai import ChatOpenAI
 from pydantic import BaseModel, Field
 
-from dotenv import load_dotenv
-from langchain.chat_models import init_chat_model
-
 load_dotenv()
-
-llm = init_chat_model("gpt-4o-mini", model_provider="openai")
 
 tagging_prompt = ChatPromptTemplate.from_template(
     """
@@ -43,8 +36,7 @@ prompt = tagging_prompt.invoke({"input": inp})
 response = llm.invoke(prompt)
 
 resp_as_dict = response.dict()
+print(resp_as_dict)
 
 # TODO: Stopped at 'finer control'
 #  see: https://python.langchain.com/docs/tutorials/classification/#finer-control
-
-print("End")
