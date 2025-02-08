@@ -146,6 +146,7 @@ for question in tutorial_questions:
         _print_event(event, _printed)
     snapshot = part_2_graph.get_state(config)
     while snapshot.next:
+        result = None
         # We have an interrupt! The agent is trying to use a tool, and the user can approve or deny it
         # Note: This code is all outside of your graph. Typically, you would stream the output to a UI.
         # Then, you would have the frontend trigger a new run via an API call when the user has provided input.
@@ -177,4 +178,5 @@ for question in tutorial_questions:
                 },
                 config,
             )
+        _print_event(result, _printed)
         snapshot = part_2_graph.get_state(config)
