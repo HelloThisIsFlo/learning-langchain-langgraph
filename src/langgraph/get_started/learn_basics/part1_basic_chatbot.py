@@ -2,7 +2,7 @@ from typing import Annotated
 
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
-from langgraph.constants import START
+from langgraph.constants import START, END
 from langgraph.graph import StateGraph
 from langgraph.graph.message import add_messages
 from typing_extensions import TypedDict
@@ -32,7 +32,7 @@ graph_builder = StateGraph(State)
 graph_builder.add_node("chatbot", chatbot)
 graph_builder.add_edge(START, "chatbot")
 
-# graph_builder.add_edge("chatbot", END)
+graph_builder.add_edge("chatbot", END)
 
 graph = graph_builder.compile()
 
