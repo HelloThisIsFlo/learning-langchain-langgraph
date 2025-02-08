@@ -9,6 +9,10 @@ from src.common.utils import get_model, save_graph_png, pretty_print_messages
 model = get_model(local=True)
 
 
+# In this example the agents will be relying on the LLM for doing math.
+# In a more realistic follow-up example, we will give the agents tools for
+# doing math.
+
 @tool
 def transfer_to_multiplication_expert():
     """Ask multiplication agent for help."""
@@ -32,10 +36,13 @@ def addition_expert(
         "ALWAYS PERFORM ADDITIONS! NEVER MULTIPLICATIONS!"
         "Always do your portion of calculation before the handoff."
     )
-    messages = [{"role": "system", "content": system_prompt}] + state[
-        "messages"]
-    ai_msg = model.bind_tools([transfer_to_multiplication_expert]).invoke(
-        messages)
+    messages = [
+                   {"role": "system", "content": system_prompt}
+               ] + state["messages"]
+    ai_msg = model.bind_tools(
+        [transfer_to_multiplication_expert]
+    ).invoke(messages)
+
     # If there are tool calls, the LLM needs to hand off to another agent
     if len(ai_msg.tool_calls) > 0:
         tool_call_id = ai_msg.tool_calls[-1]["id"]
