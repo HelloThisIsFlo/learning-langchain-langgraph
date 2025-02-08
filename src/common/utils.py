@@ -1,4 +1,6 @@
+import inspect
 import io
+import os
 
 from IPython.core.display import Image
 from IPython.core.display_functions import display
@@ -11,22 +13,30 @@ from langchain_openai import ChatOpenAI
 def get_model(local=False):
     if local:
         return ChatOpenAI(
-            model="qwen2.5-7b-instruct-1m",
+            model="qwen2.5-7b-instruct-1m@q8_0",
+            # model="qwen2.5-7b-instruct-1m",
             base_url="http://localhost:1234/v1",
             api_key="not-used",
         )
     else:
         load_dotenv()
-        return ChatOpenAI(model="gpt-4o", temperature=0)
+        return ChatOpenAI(model="gpt-4o", temperature=1)
 
 
 def save_graph_png(graph):
+    # Get the filename of the calling module
+    caller_frame = inspect.stack()[1]  # [1] to get the direct caller
+    caller_filename = inspect.getfile(caller_frame[0])
+
+    # Extract just the filename without the path or extension
+    module_name = os.path.splitext(os.path.basename(caller_filename))[0]
+
     display(Image(graph.get_graph().draw_mermaid_png()))
 
     # Save the image
     image_data = graph.get_graph().draw_mermaid_png()
     image = PILImage.open(io.BytesIO(image_data))
-    image.save("graph.png")
+    image.save(f"{module_name}__graph.png")
 
 
 def stream_graph_updates(graph, user_input: str):
