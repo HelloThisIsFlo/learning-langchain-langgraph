@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 
 
+
 def get_model(local=False):
     if local:
         return ChatOpenAI(
@@ -26,3 +27,11 @@ def save_graph_png(graph):
     image_data = graph.get_graph().draw_mermaid_png()
     image = PILImage.open(io.BytesIO(image_data))
     image.save("graph.png")
+
+
+def stream_graph_updates(graph, user_input: str):
+    for event in graph.stream(
+            {"messages": [{"role": "user", "content": user_input}]}
+    ):
+        for value in event.values():
+            print("Assistant:", value["messages"][-1].content)
