@@ -555,6 +555,19 @@ wheels = [
 ]
 
 [[package]]
+name = "langchain-localai"
+version = "0.1.2"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "langchain-core" },
+    { name = "openai" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/bc/7a/b3e7d9470950f690773d549f987d4b00d61aaae9dfed9212052b7cbeb1d6/langchain_localai-0.1.2.tar.gz", hash = "sha256:102514601ab72f9f991980e7d9e5640f012480fd32d5e3b97894aff7a93c8fc7", size = 4895 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/fb/9a/79bcc66c0b442e19c587d7b5cc5934cb64eb3d307e637206517dd99e4112/langchain_localai-0.1.2-py3-none-any.whl", hash = "sha256:ab3f57ca271cb9a8065239fa11e83aa52cdeca59d6baab45235f8c0e2ed5facd", size = 5502 },
+]
+
+[[package]]
 name = "langchain-openai"
 version = "0.3.4"
 source = { registry = "https://pypi.org/simple" }
@@ -588,6 +601,7 @@ dependencies = [
     { name = "ipython" },
     { name = "langchain" },
     { name = "langchain-core" },
+    { name = "langchain-localai" },
     { name = "langchain-openai" },
     { name = "langgraph" },
     { name = "pillow" },
@@ -599,6 +613,7 @@ requires-dist = [
     { name = "ipython", specifier = ">=8.32.0" },
     { name = "langchain", specifier = ">=0.3.18" },
     { name = "langchain-core", specifier = ">=0.3.34" },
+    { name = "langchain-localai", specifier = ">=0.1.2" },
     { name = "langchain-openai", specifier = ">=0.3.4" },
     { name = "langgraph", specifier = ">=0.2.70" },
     { name = "pillow", specifier = ">=11.1.0" },

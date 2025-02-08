@@ -3,13 +3,17 @@ from langgraph.prebuilt import create_react_agent
 from PIL import Image as PILImage
 from IPython.display import Image, display
 from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
+from langchain_openai import ChatOpenAI, OpenAI
 from typing import Literal
 from langchain_core.tools import tool
 
 load_dotenv()
 
 model = ChatOpenAI(model="gpt-4o", temperature=0)
+model = ChatOpenAI(
+    model="qwen2.5-7b-instruct-1m",
+    base_url="http://localhost:1234/v1"
+)
 
 
 def save_graph_png():
