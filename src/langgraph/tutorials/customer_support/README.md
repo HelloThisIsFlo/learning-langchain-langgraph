@@ -52,6 +52,6 @@ Here's an overview of what we're implementing:
 
 ### Review
 
-[Source ?????]()
-> TODO ???
-
+- Much better modularity, each agent is responsible for its own tasks
+- But also adds a **lot** of complexity
+- One improvement would be to refactor the code, there is a _lot_ of duplication
