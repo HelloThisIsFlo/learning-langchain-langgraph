@@ -25,9 +25,8 @@ config = {
     "recursion_limit": 50,
 }
 
-_printed = set()
-# We can reuse the tutorial questions from part 1 to see how it does.
-for question in tutorial_questions:
+
+def run_graph(question):
     events = part_4_graph.stream(
         {"messages": ("user", question)}, config, stream_mode="values",
     )
@@ -69,3 +68,17 @@ for question in tutorial_questions:
             )
         _print_event(result, _printed)
         snapshot = part_4_graph.get_state(config)
+
+
+INTERACTIVE = False
+
+_printed = set()
+if INTERACTIVE:
+    while True:
+        question = input("User: ")
+        run_graph(question)
+else:
+    for question in tutorial_questions:
+        run_graph(question)
+
+
