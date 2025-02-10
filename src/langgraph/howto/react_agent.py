@@ -5,7 +5,7 @@ from langgraph.prebuilt import create_react_agent
 
 from src.common.utils import get_model, save_graph_png
 
-model = get_model(local=True)
+model = get_model("gpt-4o-mini")
 
 
 @tool

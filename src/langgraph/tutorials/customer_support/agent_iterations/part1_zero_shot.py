@@ -22,8 +22,7 @@ from src.langgraph.tutorials.customer_support.tools.trip import *
 from src.langgraph.tutorials.customer_support.utils import \
     create_tool_node_with_fallback, _print_event
 
-llm = get_model(local=True)
-# llm = get_model(local=False)
+llm = get_model("gpt-4o-mini")
 
 
 class State(TypedDict):

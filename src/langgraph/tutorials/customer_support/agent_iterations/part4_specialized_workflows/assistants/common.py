@@ -5,8 +5,8 @@ from src.common.utils import get_model
 from src.langgraph.tutorials.customer_support.agent_iterations.part4_specialized_workflows.state import \
     State
 
-llm = get_model(local=False)
-llm = get_model(local=True)
+# llm = get_model("models/gemini-2.0-flash")
+llm = get_model("gpt-4o-mini")
 
 
 class Assistant:

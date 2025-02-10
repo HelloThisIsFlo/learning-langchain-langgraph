@@ -6,7 +6,7 @@ from typing_extensions import Literal
 
 from src.common.utils import get_model, save_graph_png, pretty_print_messages
 
-model = get_model(local=True)
+model = get_model("gpt-4o-mini")
 
 
 # In this example the agents will be relying on the LLM for doing math.

@@ -17,7 +17,7 @@ class State(TypedDict):
 
 graph_builder = StateGraph(State)
 
-llm = get_model()
+llm = get_model("gpt-4o-mini")
 
 tool = TavilySearchResults(max_results=2)
 tools = [tool]

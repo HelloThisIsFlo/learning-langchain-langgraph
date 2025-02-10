@@ -6,7 +6,7 @@ from langgraph.graph import MessagesState, StateGraph
 
 from src.common.utils import get_model
 
-model = get_model(local=False)
+model = get_model("gpt-4o-mini")
 
 
 def invoke_chatbot(state: MessagesState):
