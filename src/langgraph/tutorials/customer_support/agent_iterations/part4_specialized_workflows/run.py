@@ -72,13 +72,14 @@ def run_graph(question):
 
 INTERACTIVE = False
 
-_printed = set()
-if INTERACTIVE:
-    while True:
-        question = input("User: ")
-        run_graph(question)
-else:
-    for question in tutorial_questions:
-        run_graph(question)
+if __name__ == '__main__':
+    _printed = set()
+    if INTERACTIVE:
+        while True:
+            question = input("User: ")
+            run_graph(question)
+    else:
+        for question in tutorial_questions:
+            run_graph(question)
 
 

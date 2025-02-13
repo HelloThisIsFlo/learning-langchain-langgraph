@@ -6,7 +6,13 @@ from src.langgraph.tutorials.customer_support.agent_iterations.part4_specialized
     State
 
 # llm = get_model("models/gemini-2.0-flash")
-llm = get_model("gpt-4o-mini")
+# llm = get_model("gpt-4o-mini")
+llm = get_model("gpt-4o")
+# llm = get_model("bartowski/llama-3.2-3b-instruct")
+
+# llm = get_model("unsloth/llama-3.2-1b-instruct")
+# llm = get_model("mistral-nemo-instruct-2407")
+# llm = get_model("o3-mini")
 
 
 class Assistant:

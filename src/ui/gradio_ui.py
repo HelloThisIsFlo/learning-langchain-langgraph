@@ -24,7 +24,7 @@ memory = MemorySaver()
 graph = graph_builder.compile(checkpointer=memory)
 
 
-def random_response(message, _history):
+def chatbot_response(message, _history):
     config = {
         "configurable": {
             "thread_id": "abc123"
@@ -35,7 +35,7 @@ def random_response(message, _history):
 
 
 demo = gr.ChatInterface(
-    fn=random_response,
+    fn=chatbot_response,
     type="messages"
 )
 

@@ -8,6 +8,7 @@ from PIL import Image as PILImage
 from dotenv import load_dotenv
 from langchain_core.messages import convert_to_messages
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_mistralai import ChatMistralAI
 from langchain_openai import ChatOpenAI
 
 MODELS = {
@@ -21,10 +22,15 @@ MODELS = {
         'llama-3.2-3b-instruct',
         'llama-3.2-3b-instruct',
         "granite-3.1-8b-instruct",
+        "xlam-7b-r",
+        "llama-3-groq-8b-tool-use",
+        "bartowski/llama-3.2-3b-instruct",
+        "unsloth/llama-3.2-1b-instruct"
     ],
     "openai": [
         "gpt-4o",
         "gpt-4o-mini",
+        "o3-mini",
     ],
     "google": [
         "models/gemini-2.0-flash",
@@ -35,13 +41,22 @@ MODELS = {
 def get_model(model="gpt-4o-mini"):
     load_dotenv()
 
-    temperature = 0.7
+    temperature = 0.9
+
+    if model == "mistral-nemo-instruct-2407":
+        return ChatMistralAI(
+            model=model,
+            base_url="http://localhost:1234/v1",
+            api_key="not-used",
+            temperature=temperature
+        )
 
     if model in MODELS["local"]:
         return ChatOpenAI(
             model=model,
             base_url="http://localhost:1234/v1",
             api_key="not-used",
+            temperature=temperature
         )
     elif model in MODELS["openai"]:
         # Requires OPENAI_API_KEY

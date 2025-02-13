@@ -25,6 +25,7 @@ from src.langgraph.tutorials.customer_support.utils import \
 
 # llm = get_model(local=True)
 llm = get_model("gpt-4o-mini")
+# llm = get_model("gpt-4o")
 
 
 class State(TypedDict):
