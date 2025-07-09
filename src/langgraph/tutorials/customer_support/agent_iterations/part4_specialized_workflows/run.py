@@ -1,20 +1,22 @@
 import uuid
 
 from langchain_core.messages import ToolMessage
+from langgraph.utils.runnable import RunnableConfig
 
-from src.langgraph.tutorials.customer_support.agent_iterations.common import \
-    tutorial_questions
-from src.langgraph.tutorials.customer_support.agent_iterations.part4_specialized_workflows.graph import \
-    part_4_graph
-from src.langgraph.tutorials.customer_support.populate_db import update_dates, \
-    db
+from src.langgraph.tutorials.customer_support.agent_iterations.common import (
+    tutorial_questions,
+)
+from src.langgraph.tutorials.customer_support.agent_iterations.part4_specialized_workflows.graph import (
+    part_4_graph,
+)
+from src.langgraph.tutorials.customer_support.populate_db import update_dates, db
 from src.langgraph.tutorials.customer_support.utils import _print_event
 
 # Update with the backup file so we can restart from the original place in each section
 db = update_dates(db)
 thread_id = str(uuid.uuid4())
 
-config = {
+config: RunnableConfig = {
     "configurable": {
         # The passenger_id is used in our flight tools to
         # fetch the user's flight information
@@ -28,7 +30,9 @@ config = {
 
 def run_graph(question):
     events = part_4_graph.stream(
-        {"messages": ("user", question)}, config, stream_mode="values",
+        {"messages": ("user", question)},
+        config,
+        stream_mode="values",
     )
     for event in events:
         _print_event(event, _printed)
@@ -58,8 +62,7 @@ def run_graph(question):
                 {
                     "messages": [
                         ToolMessage(
-                            tool_call_id=event["messages"][-1].tool_calls[0][
-                                "id"],
+                            tool_call_id=event["messages"][-1].tool_calls[0]["id"],
                             content=f"API call denied by user. Reasoning: '{user_input}'. Continue assisting, accounting for the user's input.",
                         )
                     ]
@@ -72,7 +75,7 @@ def run_graph(question):
 
 INTERACTIVE = False
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     _printed = set()
     if INTERACTIVE:
         while True:
@@ -81,5 +84,3 @@ if __name__ == '__main__':
     else:
         for question in tutorial_questions:
             run_graph(question)
-
-
